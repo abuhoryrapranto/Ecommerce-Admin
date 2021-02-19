@@ -303,7 +303,7 @@
     </script>
     <script>
     $( document ).ready(function() {
-    setTimeout(function() { $("#msg").hide(); }, 3000);
+    setTimeout(function() { $("#msg").hide(); }, 5000);
     });
     </script>
   </body>

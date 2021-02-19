@@ -90,13 +90,9 @@
                                         <label class="text-primary">Select Color</label>
                                         <div class="select2-purple">
                                         <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="color[]">
-                                          <option value="Balck">Black</option>
-                                          <option value="White">White</option>
-                                          <option value="Red">Red</option>
-                                          <option value="Green">Green</option>
-                                          <option value="Yellow">Yellow</option>
-                                          <option value="Purple">Purple</option>
-                                          <option value="Blue">Blue</option>
+                                          @foreach($colors as $row)
+                                            <option value="{{$row->name}}">{{$row->name}}</option>
+                                          @endforeach
                                         </select>
                                         </div>
                                       </div>
@@ -126,27 +122,9 @@
                                         <label class="text-info">Select Size</label>
                                         <div class="select2-purple">
                                         <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="size[]">
-                                          <option value="XS">XS</option>
-                                          <option value="S">S</option>
-                                          <option value="M">M</option>
-                                          <option value="L">L</option>
-                                          <option value="XL">XL</option>
-                                          <option value="XXL">XXL</option>
-                                          <option value="XXL">XXL</option>
-                                          <!-- <option>28</option>
-                                          <option>29</option>
-                                          <option>30</option>
-                                          <option>31</option>
-                                          <option>32</option>
-                                          <option>33</option>
-                                          <option>34</option>
-                                          <option>35</option>
-                                          <option>36</option>
-                                          <option>37</option>
-                                          <option>38</option>
-                                          <option>39</option>
-                                          <option>40</option>
-                                          <option>50</option> -->
+                                          @foreach($sizes as $row)
+                                            <option value="{{$row->name}}">{{$row->name}}</option>
+                                          @endforeach
                                         </select>
                                         </div>
                                       </div>
@@ -182,16 +160,19 @@
                 <input type="number" class="form-control" id="exampleInputTotalStock" name="total_stock" placeholder="Enter Product Total Stock">
                 <!-- <small id="nameHelp" class="form-text text-muted"></small> -->
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+            </div> -->
+            <div class="form-group">
+              <textarea id="summernote" name="description"></textarea>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Product Status</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="status">
                   <option value="">---Select---</option>
-                  <option value="published">Active</option>
-                  <option value="deactive">Deactive</option>
+                  <option value="available">Available</option>
+                  <option value="not-available">Not Available</option>
                 </select>
                 @error('status')
                   <small class="form-text text-danger">{{$message}}</small>
@@ -199,7 +180,7 @@
             </div>
         </div>
     </div>
-    <div class="text-center mt-5">
+    <div class="text-center mt-5 pb-3">
         <button class="btn btn-success pl-5 pr-5">Next <i class="fas fa-chevron-right"></i></button>
     </div>
 </form>
@@ -298,12 +279,11 @@
 </div>
 
 <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
-<!-- <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script> -->
 <script>
 $('.select2').select2()
 $('.select2bs4').select2({
   theme: 'bootstrap4'
-})
+});
 </script>
 
 <script>
@@ -318,6 +298,14 @@ $('.select2bs4').select2({
             $(".sizeOption").toggle(this.checked);
         });
     })
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#summernote').summernote({
+    height: 110,
+  });
+});
 </script>
 
 @if ($errors->has('brand_name'))

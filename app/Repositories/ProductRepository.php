@@ -6,6 +6,7 @@ use App\Traits\GeneralTrait;
 use App\Models\Product;
 use App\Models\ProductOption;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 
 class ProductRepository {
@@ -40,6 +41,7 @@ class ProductRepository {
         $opt->save();
 
         DB::commit();
+        Session::put('product-saved-successfully', true);
         return true;
 
         } catch(\Exception $e) {
