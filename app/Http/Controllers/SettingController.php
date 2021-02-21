@@ -43,4 +43,23 @@ class SettingController extends Controller
             return redirect()->back()->with('msg', 'SubType save successfully.'); 
         return redirect()->back()->with('failedMsg', 'Sub Type not save successfully. Maybe, Somethings happens in conection.');
     }
+
+    public function getAllBrands(SettingRepository $settingRepository) {
+        $brands = $settingRepository->getAllBrands();
+        return view('pages.settings.brand', ['brands' => $brands]);
+    }
+
+    public function deleteBrand(SettingRepository $settingRepository, $id) {
+        $brand = $settingRepository->deleteBrand($id);
+        if($brand)
+            return redirect()->back()->with('msg', 'Brand Deleted.');
+        return redirect()->back()->with('msg', 'Something happened!');
+    }
+
+    public function brandStatusChange(SettingRepository $settingRepository, $id, $status) {
+        $brand = $settingRepository->brandStatusChange($id, $status);
+        if($status == 1)
+            return redirect()->back()->with('msg', 'Brand Activated.');
+        return redirect()->back()->with('msg', 'Brand Deactivated!');
+    }
 }

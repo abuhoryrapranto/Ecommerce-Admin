@@ -196,7 +196,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{url('brand/save-brand')}}" method="POST">
+          <form action="{{url('setting/save-brand')}}" method="POST">
             {{csrf_field()}}
             <div class="form-group">
                 @error('brand_name')
@@ -227,7 +227,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{url('brand/save-type')}}" method="POST">
+          <form action="{{url('setting/save-type')}}" method="POST">
             {{csrf_field()}}
             <div class="form-group">
                 @error('type_name')
@@ -258,7 +258,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url('brand/save-subtype')}}" method="POST">
+        <form action="{{url('setting/save-subtype')}}" method="POST">
           {{csrf_field()}}
           <div class="form-group">
                 @error('sub_type_name')

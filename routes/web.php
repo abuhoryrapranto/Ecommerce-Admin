@@ -40,10 +40,13 @@ Route::group(['middleware' => 'auth:admin' ], function(){
         Route::get('/add-images', [ProductController::class, 'addImages'])->middleware('isproductsaved');
     });
 
-    Route::prefix('brand')->group(function () {
+    Route::prefix('setting')->group(function () {
         Route::post('/save-brand', [SettingController::class, 'saveBrand']);
         Route::post('/save-type', [SettingController::class, 'saveType']);
         Route::post('/save-subtype', [SettingController::class, 'saveSubType']);
+        Route::get('/brand', [SettingController::class, 'getAllBrands']);
+        Route::get('/delete-brand/{id}', [SettingController::class, 'deleteBrand']);
+        Route::get('/statuschange-brand/{id}/{status}', [SettingController::class, 'brandStatusChange']);
     });
 
 });

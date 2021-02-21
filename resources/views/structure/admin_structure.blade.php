@@ -77,7 +77,7 @@
                 <a href="{{url('/admin-list')}}" class="nav-link {{ Request::segment(1) === 'admin-list' || Request::segment(1) === 'edit' ? 'active' : null }}">
                   <i class="nav-icon fas fa-user" style="font-size: 14px;"></i>
                   <p>
-                    Admins
+                    Admin
                   </p>
                 </a>
               </li>
@@ -93,6 +93,32 @@
                   <li class="nav-item">
                     <a href="{{url('/product/add-new')}}" class="nav-link {{ Request::segment(1) === 'product' && Request::segment(2) === 'add-new' ? 'active' : null }}">
                       <p class="ml-3">Add New</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item has-treeview {{ Request::segment(1) === 'setting' ? 'menu-open' : null }}">
+                <a href="#" class="nav-link {{ Request::segment(1) === 'setting' ? 'active' : null }}">
+                  <i class="nav-icon fas fa-cog" style="font-size: 14px;"></i>
+                  <p>
+                    Setting
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{url('/setting/brand')}}" class="nav-link {{ Request::segment(1) === 'setting' && Request::segment(2) === 'brand' ? 'active' : null }}">
+                      <p class="ml-3">Brand</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{url('/setting/type')}}" class="nav-link {{ Request::segment(1) === 'setting' && Request::segment(2) === 'type' ? 'active' : null }}">
+                      <p class="ml-3">Type</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{url('/setting/subtype')}}" class="nav-link {{ Request::segment(1) === 'setting' && Request::segment(2) === 'subtype' ? 'active' : null }}">
+                      <p class="ml-3">Subtype</p>
                     </a>
                   </li>
                 </ul>

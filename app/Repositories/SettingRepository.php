@@ -39,4 +39,18 @@ class SettingRepository {
         $data->save();
         return $data;
     }
+
+    public function getAllBrands() {
+       return Brand::orderByDesc('status')->paginate(10);
+    }
+
+    public function deleteBrand($id) {
+        return Brand::find($id)->delete();
+    }
+
+    public function brandStatusChange($id, $status) {
+        $data = Brand::find($id);
+        $data->status = $status;
+        $data->save();
+    }
 }

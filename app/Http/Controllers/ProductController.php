@@ -14,11 +14,11 @@ use App\Repositories\ProductRepository;
 class ProductController extends Controller
 {
     public function addNew() {
-        $brands = Brand::all();
-        $types = Type::all();
-        $sub_types = SubType::all();
-        $colors = Color::all();
-        $sizes = Size::all();
+        $brands = Brand::where('status', 1)->get();
+        $types = Type::where('status', 1)->get();
+        $sub_types = SubType::where('status', 1)->get();
+        $colors = Color::where('status', 1)->get();
+        $sizes = Size::where('status', 1)->get();
         return view('pages.products.add_product', [
                                                     'brands' => $brands, 
                                                     'types' => $types, 
