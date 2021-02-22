@@ -62,4 +62,42 @@ class SettingController extends Controller
             return redirect()->back()->with('msg', 'Brand Activated.');
         return redirect()->back()->with('msg', 'Brand Deactivated!');
     }
+
+    public function getAllTypes(SettingRepository $settingRepository) {
+        $types = $settingRepository->getAllTypes();
+        return view('pages.settings.type', ['types' => $types]);
+    }
+
+    public function deleteType(SettingRepository $settingRepository, $id) {
+        $type = $settingRepository->deleteType($id);
+        if($type)
+            return redirect()->back()->with('msg', 'Type Deleted.');
+        return redirect()->back()->with('msg', 'Something happened!');
+    }
+
+    public function typeStatusChange(SettingRepository $settingRepository, $id, $status) {
+        $type = $settingRepository->typeStatusChange($id, $status);
+        if($status == 1)
+            return redirect()->back()->with('msg', 'Type Activated.');
+        return redirect()->back()->with('msg', 'Type Deactivated!');
+    }
+
+    public function getAllSubTypes(SettingRepository $settingRepository) {
+        $subtypes = $settingRepository->getAllSubTypes();
+        return view('pages.settings.subtype', ['subtypes' => $subtypes]);
+    }
+
+    public function deleteSubType(SettingRepository $settingRepository, $id) {
+        $type = $settingRepository->deleteSubType($id);
+        if($type)
+            return redirect()->back()->with('msg', 'Subtype Deleted.');
+        return redirect()->back()->with('msg', 'Something happened!');
+    }
+
+    public function subTypeStatusChange(SettingRepository $settingRepository, $id, $status) {
+        $type = $settingRepository->subTypeStatusChange($id, $status);
+        if($status == 1)
+            return redirect()->back()->with('msg', 'Subtype Activated.');
+        return redirect()->back()->with('msg', 'Subtype Deactivated!');
+    }
 }

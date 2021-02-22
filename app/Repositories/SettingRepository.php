@@ -53,4 +53,32 @@ class SettingRepository {
         $data->status = $status;
         $data->save();
     }
+
+    public function getAllTypes() {
+       return Type::orderByDesc('status')->paginate(10);
+    }
+
+    public function deleteType($id) {
+        return Type::find($id)->delete();
+    }
+
+    public function typeStatusChange($id, $status) {
+        $data = Type::find($id);
+        $data->status = $status;
+        $data->save();
+    }
+
+    public function getAllSubTypes() {
+       return SubType::orderByDesc('status')->paginate(10);
+    }
+
+    public function deleteSubType($id) {
+        return SubType::find($id)->delete();
+    }
+
+    public function subTypeStatusChange($id, $status) {
+        $data = SubType::find($id);
+        $data->status = $status;
+        $data->save();
+    }
 }

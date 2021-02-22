@@ -17,6 +17,7 @@ class CreateProductImagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('url');
+            $table->string('type');
             $table->string('color')->nullable();
             $table->string('description')->nullable();
             $table->softDeletes();

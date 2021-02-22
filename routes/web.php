@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth:admin' ], function(){
     Route::prefix('product')->group(function () {
         Route::get('/add-new', [ProductController::class, 'addNew']);
         Route::post('/save-product', [ProductController::class, 'saveProduct']);
-        Route::get('/add-images', [ProductController::class, 'addImages'])->middleware('isproductsaved');
+        Route::get('/add-images', [ProductController::class, 'addImages']);//->middleware('isproductsaved');
     });
 
     Route::prefix('setting')->group(function () {
@@ -47,6 +47,12 @@ Route::group(['middleware' => 'auth:admin' ], function(){
         Route::get('/brand', [SettingController::class, 'getAllBrands']);
         Route::get('/delete-brand/{id}', [SettingController::class, 'deleteBrand']);
         Route::get('/statuschange-brand/{id}/{status}', [SettingController::class, 'brandStatusChange']);
+        Route::get('/type', [SettingController::class, 'getAllTypes']);
+        Route::get('/delete-type/{id}', [SettingController::class, 'deleteType']);
+        Route::get('/statuschange-type/{id}/{status}', [SettingController::class, 'typeStatusChange']);
+        Route::get('/subtype', [SettingController::class, 'getAllSubTypes']);
+        Route::get('/delete-subtype/{id}', [SettingController::class, 'deleteSubType']);
+        Route::get('/statuschange-subtype/{id}/{status}', [SettingController::class, 'subTypeStatusChange']);
     });
 
 });
