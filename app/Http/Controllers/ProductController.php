@@ -8,8 +8,12 @@ use App\Models\Type;
 use App\Models\SubType;
 use App\Models\Color;
 use App\Models\Size;
+use App\Models\ProductImage;
 use App\Http\Requests\ProductStoreRequest;
 use App\Repositories\ProductRepository;
+use Image;
+use DB;
+use Session;
 
 class ProductController extends Controller
 {
@@ -39,6 +43,33 @@ class ProductController extends Controller
 
     public function addImages() {
         return view('pages.products.add_images');
+    }
+
+    public function saveImages(Request $request) {
+
+        $data = [];
+        //$images = [];
+        $photo = $request->all();
+        $destinationPath = public_path('products');
+        foreach($photo['photo'] as $row) {
+            $data[] = [
+                'product_id' => Session::get('product-saved-successfully'),
+                'url' => time()."-".$row['name']->getClientOriginalName(),
+                'type' => 'feature',
+                'color' => $row['color']
+            ];
+            $images = time()."-".$row['name']->getClientOriginalName();
+
+            $resize_image = Image::make($row['name']->getRealPath());
+
+            $resize_image->resize(500, 500, function($constraint){
+            $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $images);
+        }
+        
+        DB::table('product_images')->insert($data);
+        return redirect()->back()->with('msg', 'Images upload successfully.');
+        //dd($images);
     }
 
 }
