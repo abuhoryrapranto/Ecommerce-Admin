@@ -37,8 +37,9 @@ Route::group(['middleware' => 'auth:admin' ], function(){
     Route::prefix('product')->group(function () {
         Route::get('/add-new', [ProductController::class, 'addNew']);
         Route::post('/save-product', [ProductController::class, 'saveProduct']);
-        Route::get('/add-images', [ProductController::class, 'addImages'])->middleware('isproductsaved');
+        Route::get('/add-images', [ProductController::class, 'addImages']);//->middleware('isproductsaved');
         Route::post('/save-images', [ProductController::class, 'saveImages']);
+        Route::get('/all-products', [ProductController::class, 'getAllProduct']);
     });
 
     Route::prefix('setting')->group(function () {

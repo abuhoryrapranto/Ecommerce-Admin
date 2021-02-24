@@ -28,8 +28,8 @@ class ProductStoreRequest extends FormRequest
             'brand_id'      => 'required',
             'type_id'       => 'required',
             'sub_type_id'   => 'required',
-            'main_price'    => 'required|numeric',
-            'status'        => 'required'
+            'thumbnail'     => 'image|nullable|mimes:jpeg,png,jpg|max:2048',
+            'main_price'    => 'required|numeric'
         ];
     }
 

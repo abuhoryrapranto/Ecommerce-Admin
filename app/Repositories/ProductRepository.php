@@ -13,7 +13,7 @@ class ProductRepository {
 
     use GeneralTrait;
 
-    public function saveProduct($item) {
+    public function saveProduct($item, $image_name) {
 
         DB::beginTransaction();
         try {
@@ -25,11 +25,12 @@ class ProductRepository {
         $data->brand_id = $item->brand_id;
         $data->type_id = $item->type_id;
         $data->sub_type_id = $item->sub_type_id;
+        $data->thumbnail = $image_name;
         $data->main_price = $item->main_price;
         $data->offer_price = $item->offer_price;
         $data->description = $item->description;
         $data->total_stock = $item->total_stock;
-        $data->status = $item->status;
+        $data->status = 'added';
         $data->save();
 
         $opt = new ProductOption;

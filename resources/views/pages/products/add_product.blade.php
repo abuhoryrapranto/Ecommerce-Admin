@@ -18,7 +18,7 @@
 	{{ Session::get('failedMsg') }}
 </div>
 @endif
-<form action="{{url('/product/save-product')}}" method="post">
+<form action="{{url('/product/save-product')}}" method="post" enctype="multipart/form-data">
   {{@csrf_field()}}
     <div class="row">
         <div class="col-md-6">
@@ -143,6 +143,15 @@
             </div>
         </div>
         <div class="col-md-6">
+          <div class="form-froup">
+            <label>Thumbnail Image</label>
+            <br>
+            <input type="file" name="thumbnail">
+            <br>
+            @error('thumbnail')
+              <small class="form-text text-danger">{{$message}}</small>
+            @enderror
+          </div>
             <div class="form-group">
                 <label for="exampleInputMainPrice">Main Price</label>
                 <input type="number" class="form-control" id="exampleInputMainPrice" name="main_price" placeholder="Enter Product Main Price">
@@ -166,17 +175,6 @@
             </div> -->
             <div class="form-group">
               <textarea id="summernote" name="description"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Product Status</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="status">
-                  <option value="">---Select---</option>
-                  <option value="available">Available</option>
-                  <option value="not-available">Not Available</option>
-                </select>
-                @error('status')
-                  <small class="form-text text-danger">{{$message}}</small>
-                @enderror
             </div>
         </div>
     </div>

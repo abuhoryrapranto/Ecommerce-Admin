@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id');
             $table->integer('type_id');
             $table->integer('sub_type_id');
+            $table->string('thumbnail')->nullable();
             $table->integer('main_price');
             $table->integer('offer_price')->nullable();
             $table->text('description')->nullable();

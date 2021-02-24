@@ -7,29 +7,13 @@
 	{{ Session::get('msg') }}
 </div>
 @endif
-<div class="row">
-	
-		<div class="col-md-4">
-			<div class="card">
-					<h5 class="pt-2 pb-1 text-center text-gray">Thumbnail</h5>
-			</div>
-			<div class="card">
-				<div class="card-body">
-					<div class="text-center">
-						<img src="{{ asset('dist/img/avatar.png') }}">
-						<br>
-						<input class="mt-3" type="file" name="photo[][]">
-						<input type="hidden" name="photo[][color]" id="">
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="row justify-content-md-center">
 		<div class="col-md-8">
 			<div class="card">
 				<h5 class="pt-2 pb-1 text-center text-gray">Feature Images</h5>
 			</div>
 			<div class="card">
-				<div class="text-center" id="addMoreBtn" style="display: none;">
+				<div class="text-center mt-2" id="addMoreBtn" style="display: none;">
 					<button type="button" class="btn btn-sm btn-primary">Add More!</button>
 				</div>
 				<form action="{{url('product/save-images')}}" method="POST" enctype="multipart/form-data">
