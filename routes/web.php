@@ -28,19 +28,25 @@ Route::group(['middleware' => 'auth:admin' ], function(){
     Route::get('/dashboard', function () {
         return view('pages.dashboard.dashboard');
     });
+
+    /* Admin */
+
     Route::get('/admin-list', [AdminController::class, 'getAllAdmin']);
     Route::get('/status-change/{id}/{status}', [AdminController::class, 'changeStatus']);
     Route::get('/super-change/{id}/{status}', [AdminController::class, 'changeSuper']);
+    Route::post('/save-admin', [AdminController::class, 'saveAdmin']);
 
     /* Product */
 
     Route::prefix('product')->group(function () {
         Route::get('/add-new', [ProductController::class, 'addNew']);
         Route::post('/save-product', [ProductController::class, 'saveProduct']);
-        Route::get('/add-images', [ProductController::class, 'addImages']);//->middleware('isproductsaved');
+        Route::get('/add-images', [ProductController::class, 'addImages'])->middleware('isproductsaved');
         Route::post('/save-images', [ProductController::class, 'saveImages']);
-        Route::get('/all-products', [ProductController::class, 'getAllProduct']);
+        Route::get('/all-active-products', [ProductController::class, 'getAllActiveProducts']);
     });
+
+    /* Seeting*/
 
     Route::prefix('setting')->group(function () {
         Route::post('/save-brand', [SettingController::class, 'saveBrand']);

@@ -95,6 +95,11 @@
                       <p class="ml-3">Add New</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{url('/product/all-active-products')}}" class="nav-link {{ Request::segment(1) === 'product' && Request::segment(2) === 'all-active-products' ? 'active' : null }}">
+                      <p class="ml-3">Active Products</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item has-treeview {{ Request::segment(1) === 'setting' ? 'menu-open' : null }}">
@@ -302,10 +307,10 @@
     <!-- Bootstrap 4 -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- ChartJS -->
-    <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+    <!-- <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('charts/chart-area-demo.js') }}"></script>
     <script src="{{ asset('charts/chart-pie-demo.js') }}"></script>
-    <script src="{{ asset('charts/chart-bar-demo.js') }}"></script>
+    <script src="{{ asset('charts/chart-bar-demo.js') }}"></script> -->
     <!-- Sparkline -->
     <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
     <!-- daterangepicker -->

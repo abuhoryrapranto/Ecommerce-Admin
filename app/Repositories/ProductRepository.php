@@ -30,7 +30,8 @@ class ProductRepository {
         $data->offer_price = $item->offer_price;
         $data->description = $item->description;
         $data->total_stock = $item->total_stock;
-        $data->status = 'added';
+        $data->status = 'active';
+        $data->is_published = 'no';
         $data->save();
 
         $opt = new ProductOption;
@@ -42,7 +43,7 @@ class ProductRepository {
         $opt->save();
 
         DB::commit();
-        Session::put('product-saved-successfully', true);
+        Session::put('product-saved-successfully', $data->id);
         return true;
 
         } catch(\Exception $e) {
@@ -50,5 +51,29 @@ class ProductRepository {
             //throw $e;
             return false;
         }
+    }
+
+    public function getAllActiveProducts() {
+
+        return Product::select('products.code', 
+                                'products.slug',
+                                'products.name', 
+                                'products.thumbnail', 
+                                'products.main_price', 
+                                'products.offer_price', 
+                                'products.description', 
+                                'brands.name as brand_name', 
+                                'types.name as type_name', 
+                                'sub_types.name as sub_type_name',
+                                'product_images.url',
+                                'product_images.type',
+                                'product_images.color'
+                            )
+                        ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                        ->leftJoin('types', 'types.id', '=', 'products.type_id')
+                        ->leftJoin('sub_types', 'sub_types.id', '=', 'products.sub_type_id')
+                        ->leftJoin('product_images', 'product_images.product_id', '=', 'products.id')
+                        ->where('products.status', 'active')
+                        ->get();
     }
 }

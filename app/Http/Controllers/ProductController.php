@@ -84,18 +84,41 @@ class ProductController extends Controller
         }
         
         DB::table('product_images')->insert($data);
-        return redirect()->back()->with('msg', 'Images upload successfully.');
+        Session::forget('product-saved-successfully');
+        return redirect('product/add-new')->with('msg', 'Product and Fearture Images uploaded successfully.');
         //dd($images);
     }
 
-    public function getAllProduct() {
-        $data = Product::select('products.code', 'products.slug','products.name', 'products.thumbnail', 'products.main_price', 'products.offer_price', 'products.description', 'brands.name', 'types.name', 'sub_types.name')
-                        ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
-                        ->leftJoin('types', 'types.id', '=', 'products.type_id')
-                        ->leftJoin('sub_types', 'sub_types.id', '=', 'products.sub_type_id')
-                        ->where('products.status', 'added')
-                        ->get();
-        return response()->json($data);
+    public function processFeatureImages($data) {
+        $images = $data->map(function($item) {
+            return $item->url;
+        });
+        return $images;
+    }
+
+    public function getAllActiveProducts() {
+        $products = Product::with('brand', 'type', 'subtype', 'productImages', 'productOptions')->where('status', 'active')->orderByDesc('id')->paginate(18);
+
+        $data = array();
+
+        foreach($products as $row) {
+            $newData = array(
+                'slug' => $row->slug,
+                'name' => $row->name,
+                'brand' => $row->brand->name,
+                'type' => $row->type->name,
+                'sub_type' => $row->subType->name,
+                'thumbnail' => $row->thumbnail,
+                'main_price' => $row->main_price,
+                'offer_price' => $row->offer_price,
+                'description' => $row->description,
+                'feature_images' => $row->productImages,//$this->processFeatureImages($row->productImages)
+                'options' => $row->productOptions
+            );
+            array_push($data, $newData);
+        }
+
+        return view('pages.products.active_products_list', ['products' => $data]);
     }
 
 }

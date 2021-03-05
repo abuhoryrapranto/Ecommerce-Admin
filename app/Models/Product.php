@@ -21,4 +21,12 @@ class Product extends Model
     public function subType() {
         return $this->belongsTo(SubType::class);
     }
+
+    public function productImages() {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function productOptions() {
+        return $this->hasMany(ProductOption::class);
+    }
 }
