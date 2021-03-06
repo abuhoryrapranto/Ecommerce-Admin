@@ -126,6 +126,16 @@
                       <p class="ml-3">Subtype</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{url('/setting/color')}}" class="nav-link {{ Request::segment(1) === 'setting' && Request::segment(2) === 'color' ? 'active' : null }}">
+                      <p class="ml-3">Color</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{url('/setting/size')}}" class="nav-link {{ Request::segment(1) === 'setting' && Request::segment(2) === 'size' ? 'active' : null }}">
+                      <p class="ml-3">Size</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <!--<li class="nav-item has-treeview {{ Request::segment(1) === 'products' ? 'menu-open' : null }}">

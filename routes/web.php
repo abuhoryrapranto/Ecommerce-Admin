@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth:admin' ], function(){
         Route::post('/save-brand', [SettingController::class, 'saveBrand']);
         Route::post('/save-type', [SettingController::class, 'saveType']);
         Route::post('/save-subtype', [SettingController::class, 'saveSubType']);
+        Route::post('/save-color', [SettingController::class, 'saveColor']);
+        Route::post('/save-size', [SettingController::class, 'saveSize']);
         Route::get('/brand', [SettingController::class, 'getAllBrands']);
         Route::get('/delete-brand/{id}', [SettingController::class, 'deleteBrand']);
         Route::get('/statuschange-brand/{id}/{status}', [SettingController::class, 'brandStatusChange']);
@@ -61,6 +63,12 @@ Route::group(['middleware' => 'auth:admin' ], function(){
         Route::get('/subtype', [SettingController::class, 'getAllSubTypes']);
         Route::get('/delete-subtype/{id}', [SettingController::class, 'deleteSubType']);
         Route::get('/statuschange-subtype/{id}/{status}', [SettingController::class, 'subTypeStatusChange']);
+        Route::get('/color', [SettingController::class, 'getAllColors']);
+        Route::get('/delete-color/{id}', [SettingController::class, 'deleteColor']);
+        Route::get('/statuschange-color/{id}/{status}', [SettingController::class, 'colorStatusChange']);
+        Route::get('/size', [SettingController::class, 'getAllSizes']);
+        Route::get('/delete-size/{id}', [SettingController::class, 'deleteSize']);
+        Route::get('/statuschange-size/{id}/{status}', [SettingController::class, 'sizeStatusChange']);
     });
 
 });

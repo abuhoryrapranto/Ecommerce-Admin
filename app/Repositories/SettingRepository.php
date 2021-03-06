@@ -40,6 +40,26 @@ class SettingRepository {
         return $data;
     }
 
+    public function saveColor($item) {
+
+        $data = new Color;
+        $data->name = $item->color_name;
+        $data->description = $item->description;
+        $data->save();
+
+        return $data;
+    }
+
+    public function saveSize($item) {
+
+        $data = new Size;
+        $data->name = $item->size_name;
+        $data->description = $item->description;
+        $data->save();
+
+        return $data;
+    }
+
     public function getAllBrands() {
        return Brand::orderByDesc('status')->paginate(10);
     }
@@ -78,6 +98,34 @@ class SettingRepository {
 
     public function subTypeStatusChange($id, $status) {
         $data = SubType::find($id);
+        $data->status = $status;
+        $data->save();
+    }
+
+    public function getAllColors() {
+        return Color::orderByDesc('status')->paginate(10);
+    }
+
+    public function deleteColor($id) {
+        return Color::find($id)->delete();
+    }
+
+    public function colorStatusChange($id, $status) {
+        $data = Color::find($id);
+        $data->status = $status;
+        $data->save();
+    }
+
+    public function getAllSizes() {
+        return Size::orderByDesc('status')->paginate(10);
+    }
+
+    public function deleteSize($id) {
+        return Size::find($id)->delete();
+    }
+
+    public function SizeStatusChange($id, $status) {
+        $data = Size::find($id);
         $data->status = $status;
         $data->save();
     }
