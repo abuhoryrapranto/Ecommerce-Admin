@@ -42,7 +42,7 @@ class AdminController extends Controller
             'full_name' =>'required',
             'email' => 'email|required',
             'phone' => 'numeric|digits:10',
-            'password' => 'min:6'
+            'password' => 'required|min:6'
         ]);
 
         $data = new Admin;
