@@ -43,7 +43,10 @@ Route::group(['middleware' => 'auth:admin' ], function(){
         Route::post('/save-product', [ProductController::class, 'saveProduct']);
         Route::get('/add-images', [ProductController::class, 'addImages'])->middleware('isproductsaved');
         Route::post('/save-images', [ProductController::class, 'saveImages']);
-        Route::get('/all-active-products', [ProductController::class, 'getAllActiveProducts']);
+        Route::get('/all-published-products', [ProductController::class, 'getAllPublishedProducts']);
+        Route::get('/feature-product/{slug}', [ProductController::class, 'featureProduct']);
+        Route::get('/remove-feature-product/{slug}', [ProductController::class, 'removeFeatureProduct']);
+        Route::get('/unpublish-product/{slug}', [ProductController::class, 'unpublishProduct']);
     });
 
     /* Seeting*/

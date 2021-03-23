@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('total_stock')->nullable();
             $table->string('status');
-            $table->string('is_published');
+            $table->string('is_feature');
             $table->softDeletes();
             $table->timestamps();
         });

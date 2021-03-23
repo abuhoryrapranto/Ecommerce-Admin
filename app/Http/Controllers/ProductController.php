@@ -96,8 +96,8 @@ class ProductController extends Controller
         return $images;
     }
 
-    public function getAllActiveProducts() {
-        $products = Product::with('brand', 'type', 'subtype', 'productImages', 'productOptions')->where('status', 'active')->orderByDesc('id')->paginate(18);
+    public function getAllPublishedProducts() {
+        $products = Product::with('brand', 'type', 'subtype', 'productImages', 'productOptions')->where('status', 'published')->orderByDesc('id')->paginate(18);
 
         $data = array();
 
@@ -112,6 +112,7 @@ class ProductController extends Controller
                 'main_price' => $row->main_price,
                 'offer_price' => $row->offer_price,
                 'description' => $row->description,
+                'is_feature' => $row->is_feature,
                 'feature_images' => $row->productImages,//$this->processFeatureImages($row->productImages)
                 'options' => $row->productOptions
             );
@@ -119,6 +120,30 @@ class ProductController extends Controller
         }
 
         return view('pages.products.active_products_list', ['products' => $data]);
+    }
+
+    public function featureProduct($slug) {
+        $data = Product::where('slug', $slug)->first();
+        $data->is_feature = 'yes';
+        $data->save();
+
+        return redirect()->back()->with('msg', "$data->name featured successfully!");
+    }
+
+    public function removeFeatureProduct($slug) {
+        $data = Product::where('slug', $slug)->first();
+        $data->is_feature = 'no';
+        $data->save();
+
+        return redirect()->back()->with('msg', "$data->name featured removed successfully!");
+    }
+
+    public function unpublishProduct($slug) {
+        $data = Product::where('slug', $slug)->first();
+        $data->status = 'unpublished';
+        $data->save();
+
+        return redirect()->back()->with('msg', "$data->name unpublished successfully!");
     }
 
 }

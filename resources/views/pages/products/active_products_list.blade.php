@@ -1,6 +1,6 @@
 @extends('structure.admin_structure')
-@section('title', 'Active Products')
-@section('page_header', 'Active Products')
+@section('title', 'Published Products')
+@section('page_header', 'Published Products')
 @section('add_button')
 <a  class="btn btn-outline-success btn-sm" href="{{url('/product/add-new')}}">
 Add New
@@ -16,12 +16,17 @@ Add New
 	@if(count($products) > 0)
 		@foreach($products as $row)
 		<div class="col-md-2">
-			<div class="card pd-action" data-pdname="{{$row['name']}}" data-brand="{{$row['brand']}}" data-type="{{$row['type']}}" data-subType="{{$row['sub_type']}}" data-mainPrice="{{$row['main_price']}}" data-offerPrice="{{$row['offer_price']}}" data-featureimage="{{$row['feature_images']}}" data-options="{{$row['options']}}" data-description="{{$row['description']}}" data-toggle="modal" data-target="#productDetailsModal" style="cursor: pointer;">
-				<img class="card-img-top" src="{{$row['thumbnail'] ? asset('thumbnail/'.$row['thumbnail']) : asset('dist/img/noimage.png')}}" alt="product image" height="200">
+			<div class="card pd-action" data-slug="{{$row['slug']}}" data-pdname="{{$row['name']}}" data-brand="{{$row['brand']}}" data-type="{{$row['type']}}" data-subType="{{$row['sub_type']}}" data-mainPrice="{{$row['main_price']}}" data-offerPrice="{{$row['offer_price']}}" data-featureimage="{{$row['feature_images']}}" data-options="{{$row['options']}}" data-description="{{$row['description']}}" data-isfeature="{{$row['is_feature']}}" data-toggle="modal" data-target="#productDetailsModal" style="cursor: pointer;">
+				<img class="card-img-top img-fluid" src="{{$row['thumbnail'] ? asset('thumbnail/'.$row['thumbnail']) : asset('dist/img/noimage.png')}}" alt="product image" height="200">
 				<div class="card-body">
-					<div class="text-gray">
+					<div class="text-gray float-left">
 						<b>{{$row['name']}}</b>
 					</div>
+					@if($row['is_feature'] == "yes")
+						<div class="float-right">
+							<i class="fas fa-check text-success"></i>
+						</div>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -70,8 +75,7 @@ Add New
 		</div>
 		<div class="pb-3 text-center">
 			<div class="btn-group text-white" role="group" aria-label="Second group">
-				<a class="btn btn-sm btn-info">Edit</a>
-				<a class="btn btn-sm btn-primary">Publish</a>
+				
 			</div>
 		</div>
 	  </div>
@@ -79,11 +83,14 @@ Add New
   </div>
 
   <script>
+	  let slug = '';
 	  $(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip(); 
 		$('.pd-action').click(function() {
 			$('.imgData').remove();
-
+			$(".control-btn").remove();
+			
+			slug = $(this).attr('data-slug');
 			let pd_name = $(this).attr('data-pdname');
 			let pd_brand = $(this).attr('data-brand');
 			let pd_type = $(this).attr('data-type');
@@ -93,10 +100,12 @@ Add New
 			let featureImages = $(this).attr('data-featureimage');
 			let options = $(this).attr('data-options');
 			let description = $(this).attr('data-description');
+			let isfeature = $(this).attr('data-isfeature');
 
 			$('#pd_name').html(pd_name);
 			$('#brandName').html(pd_brand);
 			$('#typeName').html(pd_type);
+			$('#subTypeName').html(pd_sub_type);
 			$('#mainPrice').html(main_price);
 			$('#description').html(description);
 
@@ -140,9 +149,30 @@ Add New
 				else {
 					$('#weight').html(weight);
 				}
+
+				if(isfeature == 'yes') {
+					$(".btn-group").append('<a class="btn btn-sm btn-info control-btn">Edit</a><button class="btn btn-sm btn-primary control-btn" id="featureBtn" onclick="removeFeatureProduct()">Remove Feature</button><button class="btn btn-sm btn-danger control-btn" id="unpublishBtn" onclick="unpublishProduct()">Unpublish</button>');
+				}
+
+				else {
+					$(".btn-group").append('<a class="btn btn-sm btn-info control-btn">Edit</a><button class="btn btn-sm btn-primary control-btn" id="featureBtn" onclick="featureProduct()">Add Feature</button><button class="btn btn-sm btn-danger control-btn" id="unpublishBtn" onclick="unpublishProduct()">Unpublish</button>');
+				}
 			});
 			
 		})
-	  })
+	  });
+
+	  function featureProduct() {
+		window.location.href = "{{url('/product/feature-product')}}"+"/"+slug;
+	  }
+
+	  function removeFeatureProduct() {
+		window.location.href = "{{url('/product/remove-feature-product')}}"+"/"+slug;
+	  }
+
+	  function unpublishProduct() {
+		window.location.href = "{{url('/product/unpublish-product')}}"+"/"+slug;
+	  }
+
   </script>
 @endsection

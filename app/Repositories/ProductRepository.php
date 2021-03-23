@@ -30,8 +30,8 @@ class ProductRepository {
         $data->offer_price = $item->offer_price;
         $data->description = $item->description;
         $data->total_stock = $item->total_stock;
-        $data->status = 'active';
-        $data->is_published = 'no';
+        $data->status = 'unpublished';
+        $data->is_feature = 'no';
         $data->save();
 
         $opt = new ProductOption;

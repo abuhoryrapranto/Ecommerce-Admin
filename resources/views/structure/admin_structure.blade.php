@@ -96,8 +96,8 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{url('/product/all-active-products')}}" class="nav-link {{ Request::segment(1) === 'product' && Request::segment(2) === 'all-active-products' ? 'active' : null }}">
-                      <p class="ml-3">Active Products</p>
+                    <a href="{{url('/product/all-published-products')}}" class="nav-link {{ Request::segment(1) === 'product' && Request::segment(2) === 'all-published-products' ? 'active' : null }}">
+                      <p class="ml-3">Published Products</p>
                     </a>
                   </li>
                 </ul>
