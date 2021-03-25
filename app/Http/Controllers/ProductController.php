@@ -71,7 +71,7 @@ class ProductController extends Controller
         foreach($photo['photo'] as $row) {
             $data[] = [
                 'product_id' => Session::get('product-saved-successfully'),
-                'url' => time()."-".$row['name']->getClientOriginalName(),
+                'url' => time()."-".$countImage.'-'.$row['name']->getClientOriginalName(),
                 'type' => 'feature',
                 'color' => $row['color']
             ];
