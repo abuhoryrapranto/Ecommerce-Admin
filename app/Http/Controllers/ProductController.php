@@ -64,6 +64,7 @@ class ProductController extends Controller
 
     public function saveImages(Request $request) {
 
+        $countImage = 1;
         $data = [];
         $photo = $request->all();
         $destinationPath = public_path('products');
@@ -74,13 +75,14 @@ class ProductController extends Controller
                 'type' => 'feature',
                 'color' => $row['color']
             ];
-            $images = time()."-".$row['name']->getClientOriginalName();
+            $images = time()."-".$countImage.'-'.$row['name']->getClientOriginalName();
 
             $resize_image = Image::make($row['name']->getRealPath());
 
             $resize_image->resize(500, 500, function($constraint){
             $constraint->aspectRatio();
             })->save($destinationPath . '/' . $images);
+            $countImage++;
         }
         
         DB::table('product_images')->insert($data);
