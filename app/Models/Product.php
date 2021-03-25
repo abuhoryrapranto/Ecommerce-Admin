@@ -27,6 +27,6 @@ class Product extends Model
     }
 
     public function productOptions() {
-        return $this->hasMany(ProductOption::class);
+        return $this->hasOne(ProductOption::class);
     }
 }
