@@ -122,42 +122,38 @@ Add New
 				$('.featureImages').append(htmlTag);
 			});
 
-			let optionsData = JSON.parse(options);
-			optionsData.forEach(element => {
-				let colors = element.color;
-				let sizes = element.size;
-				let weight = element.weight;
-				if(!colors) {
-					$('#colors').html('Not Available');
-				}
-				else {
-					$('#colors').html(colors);
-				}
+			if(isfeature == 'yes') {
+				$(".btn-group").append('<a class="btn btn-sm btn-info control-btn">Edit</a><button class="btn btn-sm btn-primary control-btn" id="featureBtn" onclick="removeFeatureProduct()">Remove Feature</button><button class="btn btn-sm btn-danger control-btn" id="unpublishBtn" onclick="unpublishProduct()">Unpublish</button>');
+			}
 
-				if(!sizes) {
-					$('#sizes').html('Not Available');
-				}
-
-				else {
-					$('#sizes').html(sizes);
-				}
-
-				if(!weight) {
-					$('#weight').html('Not Available');
-				}
-
-				else {
-					$('#weight').html(weight);
-				}
-
-				if(isfeature == 'yes') {
-					$(".btn-group").append('<a class="btn btn-sm btn-info control-btn">Edit</a><button class="btn btn-sm btn-primary control-btn" id="featureBtn" onclick="removeFeatureProduct()">Remove Feature</button><button class="btn btn-sm btn-danger control-btn" id="unpublishBtn" onclick="unpublishProduct()">Unpublish</button>');
-				}
-
-				else {
+			else {
 					$(".btn-group").append('<a class="btn btn-sm btn-info control-btn">Edit</a><button class="btn btn-sm btn-primary control-btn" id="featureBtn" onclick="featureProduct()">Add Feature</button><button class="btn btn-sm btn-danger control-btn" id="unpublishBtn" onclick="unpublishProduct()">Unpublish</button>');
-				}
-			});
+			}
+
+			let optionsData = JSON.parse(options);
+
+			if(!optionsData.color) {
+				$('#colors').html('Not Available');
+			}
+			else {
+				$('#colors').html(optionsData.color);
+			}
+
+			if(!optionsData.size) {
+				$('#sizes').html('Not Available');
+			}
+
+			else {
+				$('#sizes').html(optionsData.size);
+			}
+
+			if(!optionsData.weight) {
+				$('#weight').html('Not Available');
+			}
+
+			else {
+				$('#weight').html(optionsData.weight);
+			}	
 			
 		})
 	  });
