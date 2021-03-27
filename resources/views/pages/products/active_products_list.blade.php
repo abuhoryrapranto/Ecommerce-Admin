@@ -24,7 +24,7 @@ Add New
 					</div>
 					@if($row['is_feature'] == "yes")
 						<div class="float-right">
-							<i class="fas fa-check text-success"></i>
+							<p class="text-white bg-success pl-2 pr-2 rounded">Feature</p>
 						</div>
 					@endif
 				</div>
