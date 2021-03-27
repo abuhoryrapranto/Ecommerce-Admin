@@ -1,5 +1,10 @@
 @extends('structure.admin_structure')
 @section('title', 'Published Products')
+<style>
+	.pd-action {
+		height: 250px;
+	}
+</style>
 @section('page_header', 'Published Products')
 @section('add_button')
 <a  class="btn btn-outline-success btn-sm" href="{{url('/product/add-new')}}">
