@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->integer('main_price');
             $table->integer('offer_price')->nullable();
+            $table->tinyInteger('units')->default('1');
             $table->text('description')->nullable();
             $table->integer('total_stock')->nullable();
             $table->string('status');
